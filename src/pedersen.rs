@@ -144,10 +144,7 @@ impl<
     >
     PublicParameters<BATCH_SIZE, GroupElementValue, ScalarPublicParameters, GroupPublicParameters>
 {
-    pub fn derive_default<
-        const SCALAR_LIMBS: usize,
-        GroupElement: PrimeGroupElement<SCALAR_LIMBS> + HashToGroup,
-    >() -> crate::Result<Self>
+    pub fn derive_default<const SCALAR_LIMBS: usize, GroupElement>() -> crate::Result<Self>
     where
         GroupElement::Scalar: group::GroupElement<PublicParameters = ScalarPublicParameters>,
         GroupElement: group::GroupElement<
@@ -156,6 +153,7 @@ impl<
         >,
         ScalarPublicParameters: Default,
         GroupPublicParameters: Default,
+        GroupElement: PrimeGroupElement<SCALAR_LIMBS> + HashToGroup,
     {
         Self::derive::<SCALAR_LIMBS, GroupElement>(
             ScalarPublicParameters::default(),
@@ -163,19 +161,15 @@ impl<
         )
     }
 
-    pub fn derive<
-        const SCALAR_LIMBS: usize,
-        GroupElement: PrimeGroupElement<SCALAR_LIMBS> + HashToGroup,
-    >(
+    pub fn derive<const SCALAR_LIMBS: usize, GroupElement>(
         scalar_public_parameters: group::PublicParameters<GroupElement::Scalar>,
         group_public_parameters: group::PublicParameters<GroupElement>,
     ) -> crate::Result<Self>
     where
         GroupElement::Scalar: group::GroupElement<PublicParameters = ScalarPublicParameters>,
-        GroupElement: group::GroupElement<
-            Value = GroupElementValue,
-            PublicParameters = GroupPublicParameters,
-        >,
+        GroupElement: group::GroupElement<Value = GroupElementValue, PublicParameters = GroupPublicParameters>
+            + PrimeGroupElement<SCALAR_LIMBS>
+            + HashToGroup,
     {
         let message_generators = array::from_fn(|i| {
             if i == 0 {
@@ -215,11 +209,7 @@ impl<
     ///
     /// In any other case, when possible, e.g. for all traditional use-cases such as Pedersen over
     /// elliptic curves, use [`Self::derive`] or [`Self::derive_default`] instead.
-    pub fn new<
-        const SCALAR_LIMBS: usize,
-        Scalar: group::GroupElement,
-        GroupElement: group::GroupElement,
-    >(
+    pub fn new<const SCALAR_LIMBS: usize, Scalar, GroupElement>(
         scalar_public_parameters: group::PublicParameters<Scalar>,
         group_public_parameters: group::PublicParameters<GroupElement>,
         message_generators: [group::Value<GroupElement>; BATCH_SIZE],
@@ -232,10 +222,9 @@ impl<
             + for<'r> Mul<&'r GroupElement, Output = GroupElement>
             + Samplable
             + Copy,
-        GroupElement: group::GroupElement<
-            Value = GroupElementValue,
-            PublicParameters = GroupPublicParameters,
-        >,
+        GroupElement: group::GroupElement<Value = GroupElementValue, PublicParameters = GroupPublicParameters>
+            + group::GroupElement,
+        Scalar: group::GroupElement,
     {
         Self {
             groups_public_parameters: GroupsPublicParameters {
