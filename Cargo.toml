@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+
+members = []
+
+[workspace.package]
+authors = ["dWallet Labs Ltd. <dev@dwalletlabas.com>"]
+description = "dWallet Labs LTD. Cryptography Library."
+edition = "2021"
+license = "BSD-3-Clause-Clear"
+repository = "https://github.com/dwallet-labs/crypto"
+version = "0.1.0"

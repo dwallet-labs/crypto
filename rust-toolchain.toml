@@ -1,0 +1,5 @@
+[toolchain]
+# Hardcode a Rust version.
+channel = "1.80"
+# Use Rust Nighlty version.
+#channel = "nighlty"
