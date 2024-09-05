@@ -9,8 +9,8 @@ crypto-bigint = { version = "0.5", features = ["rand_core", "serde"], default-fe
 merlin = { version = "3", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
-group = { git = "https://github.com/dwallet-labs/group.git" }
-commitment = { git = "https://github.com/dwallet-labs/commitment.git" }
+group = { path = "../group" }
+commitment = { path = "../commitment" }
 thiserror = "1.0"
 bulletproofs = { git = "https://github.com/ycscaly/bulletproofs.git" }
 

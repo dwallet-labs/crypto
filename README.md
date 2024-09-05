@@ -38,6 +38,11 @@ Trait & helpers for zk-proofs and range proofs.
 
 Traits for homomorphic encryption schemes, including threshold homomorphic decryption schemes.
 
+## commitment
+
+Traits for homomorphic commitment schemes, including Pedersen-based implementations.
+Includes implementation for hash-based non-homomorphic commitment using [`merlin::Transcript`].
+
 ## enhanced-maurer
 
 This crate builds upon the `maurer` crate for zero-knowledge proofs over any language $L = {(x, X) | X = \phi(x)}$
