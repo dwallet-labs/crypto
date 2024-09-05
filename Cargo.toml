@@ -1,7 +1,9 @@
 [workspace]
 resolver = "2"
 
-members = []
+members = [
+    "enhanced_maurer"
+]
 
 [workspace.package]
 authors = ["dWallet Labs Ltd. <dev@dwalletlabas.com>"]
