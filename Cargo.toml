@@ -2,7 +2,8 @@
 resolver = "2"
 
 members = [
-    "enhanced_maurer"
+    "group",
+    "enhanced-maurer"
 ]
 
 [workspace.package]
