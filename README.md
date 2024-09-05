@@ -30,6 +30,10 @@ bypass verification for incorrect claims, or even derive secrets of other partie
 Instead, the verifier should only receive the value of group elements and instantiate the group element using *their
 own public parameters*, which ensure operating in the correct group.
 
+## proof
+
+Trait & helpers for zk-proofs and range proofs.
+
 ## enhanced-maurer
 
 This crate builds upon the `maurer` crate for zero-knowledge proofs over any language $L = {(x, X) | X = \phi(x)}$
