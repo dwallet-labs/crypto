@@ -43,6 +43,12 @@ Traits for homomorphic encryption schemes, including threshold homomorphic decry
 Traits for homomorphic commitment schemes, including Pedersen-based implementations.
 Includes implementation for hash-based non-homomorphic commitment using [`merlin::Transcript`].
 
+## maurer
+
+Generic Maurer zero-knowledge proofs for any language ${L = {(x, X) | X = \phi(x)}}$ associated with a group
+homomorphism
+$\phi(x + y) = \phi(x) + \phi(y)$.
+
 ## enhanced-maurer
 
 This crate builds upon the `maurer` crate for zero-knowledge proofs over any language $L = {(x, X) | X = \phi(x)}$

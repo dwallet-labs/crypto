@@ -6,6 +6,7 @@ members = [
     "commitment",
     "proof",
     "homomorphic-encryption",
+    "maurer",
     "enhanced-maurer"
 ]
 
