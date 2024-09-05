@@ -34,6 +34,10 @@ own public parameters*, which ensure operating in the correct group.
 
 Trait & helpers for zk-proofs and range proofs.
 
+## homomorphic-encryption
+
+Traits for homomorphic encryption schemes, including threshold homomorphic decryption schemes.
+
 ## enhanced-maurer
 
 This crate builds upon the `maurer` crate for zero-knowledge proofs over any language $L = {(x, X) | X = \phi(x)}$
