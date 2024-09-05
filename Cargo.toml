@@ -8,7 +8,8 @@ members = [
     "homomorphic-encryption",
     "maurer",
     "enhanced-maurer",
-    "tiresias"
+    "tiresias",
+    "2pc-mpc"
 ]
 
 [workspace.package]
