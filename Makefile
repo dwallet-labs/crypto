@@ -22,8 +22,14 @@ lint:
 doc:
 	cargo doc --workspace --no-deps --all-features --document-private-items --examples
 
-bench:
-	cargo bench --features benchmarking
+bench-all:
+	cargo bench --features benchmarking --workspace
+bench-maurer:
+	cargo bench --features benchmarking --package maurer
+bench-2pc:
+	cargo bench --features benchmarking --package 2pc-mpc
+bench-tiresias:
+	cargo bench --features benchmarking --package tiresias
 
 audit:
 	cargo audit

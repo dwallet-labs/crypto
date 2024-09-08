@@ -18,12 +18,12 @@ enhanced_maurer = { path = "../enhanced-maurer" }
 tiresias = { path = "../tiresias", features = ["test_exports"] }
 thiserror = { workspace = true }
 
-# Benchmarks.
-criterion = { version = "0.5", features = ["html_reports"], optional = true }
-getrandom = { version = "0.2", features = ["js"] }
-rand = { version = "0.8", features = ["std"], optional = true }
-rand_core = { version = "0.6", features = ["std"], optional = true }
-rstest = { version = "0.18", optional = true }
+# For Benchmarks.
+criterion = { workspace = true, features = ["html_reports"], optional = true }
+getrandom = { workspace = true, features = ["js"] }
+rand = { workspace = true, features = ["std"], optional = true }
+rand_core = { workspace = true, features = ["std"], optional = true }
+rstest = { workspace = true, optional = true }
 ecdsa = { version = "0.16.9", features = ["verifying"], optional = true }
 k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
 
@@ -31,7 +31,7 @@ k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-
 rand = { workspace = true, features = ["std"] }
 rand_core = { workspace = true, features = ["std"] }
 rstest = { workspace = true }
-criterion = { version = "0.5", features = ["html_reports"] }
+criterion = { workspace = true, features = ["html_reports"] }
 proof = { path = "../proof", features = ["test_helpers"] }
 maurer = { path = "../maurer", features = ["test_helpers"] }
 ecdsa = { version = "0.16.9", features = ["verifying"] }
@@ -41,7 +41,7 @@ k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-
 secp256k1 = []
 paillier = []
 bulletproofs = []
-benchmarking = ["dep:criterion", "dep:rand_core", "dep:rstest", "dep:ecdsa", "dep:k256", "secp256k1", "paillier", "bulletproofs", "proof/test_helpers"]
+benchmarking = ["dep:criterion", "dep:rand", "dep:rand_core", "dep:rstest", "dep:ecdsa", "dep:k256", "secp256k1", "paillier", "bulletproofs", "proof/test_helpers"]
 
 [[bench]]
 name = "benches"

@@ -8,12 +8,11 @@ members = [
     "homomorphic-encryption",
     "enhanced-maurer",
     "maurer",
-    "tiresias"
-]
-
-exclude = [
+    "tiresias",
     "2pc-mpc",
 ]
+
+exclude = []
 
 [workspace.package]
 authors = ["dWallet Labs Ltd. <dev@dwalletlabas.com>"]
