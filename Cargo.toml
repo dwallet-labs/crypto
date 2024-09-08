@@ -7,12 +7,12 @@ members = [
     "proof",
     "homomorphic-encryption",
     "enhanced-maurer",
+    "maurer",
+    "tiresias"
 ]
 
 exclude = [
     "2pc-mpc",
-    "maurer",
-    "tiresias"
 ]
 
 [workspace.package]
@@ -37,4 +37,6 @@ rayon = { version = "1.10.0" }
 rand_core = { version = "0.6.4", default-features = false }
 rstest = "0.22.0"
 rand = "0.8.5"
-curve25519-dalek = { package = "curve25519-dalek-ng", version = "4", default-features = false, features = ["u64_backend", "serde"] }
+curve25519-dalek = { package = "curve25519-dalek-ng", version = "4", default-features = false }
+criterion = { version = "0.5" }
+getrandom = { version = "0.2" }
