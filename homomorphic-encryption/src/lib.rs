@@ -36,7 +36,7 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 /// An Encryption Key of an Additively Homomorphic Encryption scheme.
 pub trait AdditivelyHomomorphicEncryptionKey<const PLAINTEXT_SPACE_SCALAR_LIMBS: usize>:
-PartialEq + Clone + Debug + Eq
+    PartialEq + Clone + Debug + Eq
 {
     type PlaintextSpaceGroupElement: KnownOrderScalar<PLAINTEXT_SPACE_SCALAR_LIMBS>;
     type RandomnessSpaceGroupElement: GroupElement + Samplable;
@@ -50,17 +50,17 @@ PartialEq + Clone + Debug + Eq
     /// As such, it uniquely identifies the encryption-scheme (alongside the type `Self`) and will
     /// be used for Fiat-Shamir Transcripts.
     type PublicParameters: AsRef<
-        GroupsPublicParameters<
-            PlaintextSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
-            RandomnessSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
-            CiphertextSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
-        >,
-    > + Serialize
-    + for<'r> Deserialize<'r>
-    + PartialEq
-    + Clone
-    + Debug
-    + Eq;
+            GroupsPublicParameters<
+                PlaintextSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
+                RandomnessSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
+                CiphertextSpacePublicParameters<PLAINTEXT_SPACE_SCALAR_LIMBS, Self>,
+            >,
+        > + Serialize
+        + for<'r> Deserialize<'r>
+        + PartialEq
+        + Clone
+        + Debug
+        + Eq;
 
     /// Instantiate the encryption key from the public parameters of the encryption scheme.
     fn new(public_parameters: &Self::PublicParameters) -> Result<Self>;
@@ -152,12 +152,10 @@ PartialEq + Clone + Debug + Eq
     /// Correctness is assured as long as $\PT_{\sf eval}<N$.
     ///
     /// In more detail, these steps are taken to generically assure circuit privacy:
-    /// 1. Re-randomization.
-    ///    This should be done by adding encryption of zero with fresh
-    ///    (uniformly sampled) randomness to the outputted ciphertext.
+    /// 1. Re-randomization. This should be done by adding encryption of zero with fresh (uniformly
+    ///    sampled) randomness to the outputted ciphertext.
     ///
-    /// 2. Masking.
-    ///    Our evaluation should be masked by a random multiplication of the homomorphic
+    /// 2. Masking. Our evaluation should be masked by a random multiplication of the homomorphic
     ///    evaluation group order $q$.
     ///
     ///    While the decryption modulo $q$ will remain correct,
@@ -173,8 +171,7 @@ PartialEq + Clone + Debug + Eq
     ///    An exception to the above is when the ciphertext was encrypted by the caller,
     ///    in which case the caller knows the corresponding plaintext.
     ///
-    /// 3. No modulations.
-    ///    The size of our evaluation $\PT_{\sf eval}$ should be smaller than the
+    /// 3. No modulations. The size of our evaluation $\PT_{\sf eval}$ should be smaller than the
     ///    order of the encryption plaintext group $N$ to ensure it does not go through modulation
     ///    in the plaintext space.
     ///
@@ -240,7 +237,7 @@ PartialEq + Clone + Debug + Eq
                         evaluation_upper_bound.checked_add(&mask_by_modulus)
                     }),
             )
-                .ok_or(Error::SecureFunctionEvaluation)?;
+            .ok_or(Error::SecureFunctionEvaluation)?;
 
             // And finally, checking that it is smaller than the plaintext order
             // $ $\PT_{\sf eval}$ < N $:
@@ -413,12 +410,12 @@ pub trait AdditivelyHomomorphicDecryptionKeyShare<
     type LagrangeCoefficient: Clone + Debug + PartialEq + Eq;
     /// The public parameters of the threshold decryption scheme.
     type PublicParameters: AsRef<EncryptionKey::PublicParameters>
-    + Serialize
-    + for<'r> Deserialize<'r>
-    + PartialEq
-    + Clone
-    + Debug
-    + Eq;
+        + Serialize
+        + for<'r> Deserialize<'r>
+        + PartialEq
+        + Clone
+        + Debug
+        + Eq;
 
     /// An error in threshold decryption.
     type Error: Debug;
@@ -518,7 +515,7 @@ pub trait GroupsPublicParametersAccessors<
     RandomnessSpacePublicParameters: 'a,
     CiphertextSpacePublicParameters: 'a,
 >:
-AsRef<
+    AsRef<
     GroupsPublicParameters<
         PlaintextSpacePublicParameters,
         RandomnessSpacePublicParameters,
@@ -540,36 +537,37 @@ AsRef<
 }
 
 impl<
-    'a,
-    PlaintextSpacePublicParameters: 'a,
-    RandomnessSpacePublicParameters: 'a,
-    CiphertextSpacePublicParameters: 'a,
-    T: AsRef<
-        GroupsPublicParameters<
-            PlaintextSpacePublicParameters,
-            RandomnessSpacePublicParameters,
-            CiphertextSpacePublicParameters,
+        'a,
+        PlaintextSpacePublicParameters: 'a,
+        RandomnessSpacePublicParameters: 'a,
+        CiphertextSpacePublicParameters: 'a,
+        T: AsRef<
+            GroupsPublicParameters<
+                PlaintextSpacePublicParameters,
+                RandomnessSpacePublicParameters,
+                CiphertextSpacePublicParameters,
+            >,
         >,
-    >,
->
-GroupsPublicParametersAccessors<
-    'a,
-    PlaintextSpacePublicParameters,
-    RandomnessSpacePublicParameters,
-    CiphertextSpacePublicParameters,
-> for T
-{}
+    >
+    GroupsPublicParametersAccessors<
+        'a,
+        PlaintextSpacePublicParameters,
+        RandomnessSpacePublicParameters,
+        CiphertextSpacePublicParameters,
+    > for T
+{
+}
 
 impl<
-    PlaintextSpacePublicParameters,
-    RandomnessSpacePublicParameters,
-    CiphertextSpacePublicParameters,
-> AsRef<Self>
-for GroupsPublicParameters<
-    PlaintextSpacePublicParameters,
-    RandomnessSpacePublicParameters,
-    CiphertextSpacePublicParameters,
->
+        PlaintextSpacePublicParameters,
+        RandomnessSpacePublicParameters,
+        CiphertextSpacePublicParameters,
+    > AsRef<Self>
+    for GroupsPublicParameters<
+        PlaintextSpacePublicParameters,
+        RandomnessSpacePublicParameters,
+        CiphertextSpacePublicParameters,
+    >
 {
     fn as_ref(&self) -> &Self {
         self
@@ -596,7 +594,7 @@ group::PublicParameters<<E as AdditivelyHomomorphicEncryptionKey<PLAINTEXT_SPACE
 pub type CiphertextSpaceValue<const PLAINTEXT_SPACE_SCALAR_LIMBS: usize, E> =
 group::Value<<E as AdditivelyHomomorphicEncryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS>>::CiphertextSpaceGroupElement>;
 pub type PublicParameters<const PLAINTEXT_SPACE_SCALAR_LIMBS: usize, E> =
-<E as AdditivelyHomomorphicEncryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS>>::PublicParameters;
+    <E as AdditivelyHomomorphicEncryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS>>::PublicParameters;
 
 #[allow(clippy::erasing_op)]
 #[allow(clippy::identity_op)]
@@ -623,7 +621,7 @@ pub mod tests {
                 plaintext.into(),
                 public_parameters.plaintext_space_public_parameters(),
             )
-                .unwrap();
+            .unwrap();
 
         let (_, ciphertext) = encryption_key
             .encrypt(&plaintext, public_parameters, rng)
@@ -642,7 +640,7 @@ pub mod tests {
         const EVALUATION_GROUP_SCALAR_LIMBS: usize,
         const PLAINTEXT_SPACE_SCALAR_LIMBS: usize,
         EvaluationGroupElement: KnownOrderScalar<EVALUATION_GROUP_SCALAR_LIMBS>
-        + From<Value<EncryptionKey::PlaintextSpaceGroupElement>>,
+            + From<Value<EncryptionKey::PlaintextSpaceGroupElement>>,
         EncryptionKey: AdditivelyHomomorphicEncryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS>,
         DecryptionKey,
     >(
@@ -652,7 +650,7 @@ pub mod tests {
         rng: &mut impl CryptoRngCore,
     ) where
         DecryptionKey:
-        AdditivelyHomomorphicDecryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS, EncryptionKey>,
+            AdditivelyHomomorphicDecryptionKey<PLAINTEXT_SPACE_SCALAR_LIMBS, EncryptionKey>,
     {
         let encryption_key = decryption_key.as_ref();
 
@@ -661,38 +659,38 @@ pub mod tests {
             zero.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
 
         let one: Uint<PLAINTEXT_SPACE_SCALAR_LIMBS> = (&U64::from(1u64)).into();
         let one = EncryptionKey::PlaintextSpaceGroupElement::new(
             one.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
         let two: Uint<PLAINTEXT_SPACE_SCALAR_LIMBS> = (&U64::from(2u64)).into();
         let two = EncryptionKey::PlaintextSpaceGroupElement::new(
             two.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
         let five: Uint<PLAINTEXT_SPACE_SCALAR_LIMBS> = (&U64::from(5u64)).into();
         let five = EncryptionKey::PlaintextSpaceGroupElement::new(
             five.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
         let seven: Uint<PLAINTEXT_SPACE_SCALAR_LIMBS> = (&U64::from(7u64)).into();
         let seven = EncryptionKey::PlaintextSpaceGroupElement::new(
             seven.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
         let seventy_three: Uint<PLAINTEXT_SPACE_SCALAR_LIMBS> = (&U64::from(73u64)).into();
         let seventy_three = EncryptionKey::PlaintextSpaceGroupElement::new(
             seventy_three.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
 
         let (_, encrypted_two) = encryption_key
             .encrypt(&two, public_parameters, rng)
@@ -716,7 +714,7 @@ pub mod tests {
             expected_evaluation_result.into(),
             public_parameters.plaintext_space_public_parameters(),
         )
-            .unwrap();
+        .unwrap();
 
         assert_eq!(
             expected_evaluation_result,
@@ -729,7 +727,7 @@ pub mod tests {
             public_parameters.randomness_space_public_parameters(),
             rng,
         )
-            .unwrap();
+        .unwrap();
 
         let evaluation_order = (&EvaluationGroupElement::order_from_public_parameters(
             evaluation_group_public_parameters,
@@ -747,7 +745,7 @@ pub mod tests {
             public_parameters,
             rng,
         )
-            .unwrap();
+        .unwrap();
 
         let privately_evaluted_ciphertext = encryption_key
             .securely_evaluate_linear_combination_with_randomness(

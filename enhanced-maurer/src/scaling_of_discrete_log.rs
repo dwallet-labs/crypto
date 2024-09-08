@@ -158,7 +158,9 @@ where
         )?;
 
         // No masking of the plaintext is needed, as we don't need secure function evaluation.
-        // However, we do want to re-randomize the ciphertext when doing the scalar multiplication, to ensure circuit privacy against an adversary that does not hold the private key, that is, the centralised party A.
+        // However, we do want to re-randomize the ciphertext when doing the scalar multiplication,
+        // to ensure circuit privacy against an adversary that does not hold the private key, that
+        // is, the centralised party A.
         let mask = witness.discrete_log().neutral();
 
         let scaled_ciphertext = encryption_key

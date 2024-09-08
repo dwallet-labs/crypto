@@ -3,16 +3,13 @@
 
 use std::collections::{HashMap, HashSet};
 
+use commitment::Commitment;
 use crypto_bigint::rand_core::CryptoRngCore;
 use group::{ComputationalSecuritySizedNumber, PartyID};
 use proof::aggregation::{process_incoming_messages, DecommitmentRoundParty};
 use serde::{Deserialize, Serialize};
 
-use commitment::Commitment;
-
-use crate::aggregation::proof_share_round;
-use crate::language;
-use crate::{Error, Result};
+use crate::{aggregation::proof_share_round, language, Error, Result};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct Decommitment<const REPETITIONS: usize, Language: language::Language<REPETITIONS>> {

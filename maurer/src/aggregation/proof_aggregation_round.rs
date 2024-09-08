@@ -4,16 +4,15 @@
 use std::collections::{HashMap, HashSet};
 
 use crypto_bigint::rand_core::CryptoRngCore;
-use group::helpers::FlatMapResults;
-use group::PartyID;
-use group::{ComputationalSecuritySizedNumber, GroupElement};
+use group::{helpers::FlatMapResults, ComputationalSecuritySizedNumber, GroupElement, PartyID};
 use proof::aggregation::{process_incoming_messages, ProofAggregationRoundParty};
 use serde::Serialize;
 
-use crate::aggregation::proof_share_round::ProofShare;
-use crate::aggregation::Output;
-use crate::language::GroupsPublicParametersAccessors;
-use crate::{Error, Proof, Result};
+use crate::{
+    aggregation::{proof_share_round::ProofShare, Output},
+    language::GroupsPublicParametersAccessors,
+    Error, Proof, Result,
+};
 
 #[cfg_attr(any(test, feature = "test_helpers"), derive(Clone))]
 pub struct Party<
@@ -126,10 +125,9 @@ impl<
             )
             .is_err()
         {
-            /*
-               Identifiable abort logic: using the challenges of the aggregated proof, validate the individual proofs
-               (i.e. proof share, statement mask produced by every party).
-            */
+            // Identifiable abort logic: using the challenges of the aggregated proof, validate the
+            // individual proofs (i.e. proof share, statement mask produced by every
+            // party).
             let mut transcript = Proof::<REPETITIONS, Language, ProtocolContext>::setup_transcript(
                 &self.protocol_context,
                 &self.language_public_parameters,

@@ -3,12 +3,13 @@
 
 pub mod fischlin;
 
+use std::{array, marker::PhantomData};
+
 use crypto_bigint::rand_core::CryptoRngCore;
 use group::{helpers::FlatMapResults, ComputationalSecuritySizedNumber, GroupElement, Samplable};
 use merlin::Transcript;
 use proof::TranscriptProtocol;
 use serde::{Deserialize, Serialize};
-use std::{array, marker::PhantomData};
 
 use crate::{
     language,
@@ -396,7 +397,8 @@ impl<
 
 // These tests helpers can be used for different `group` implementations,
 // therefore they need to be exported.
-// Since exporting rust `#[cfg(test)]` is impossible, they exist in a dedicated feature-gated module.
+// Since exporting rust `#[cfg(test)]` is impossible, they exist in a dedicated feature-gated
+// module.
 #[cfg(any(test, feature = "benchmarking"))]
 #[allow(unused_imports)]
 pub(super) mod test_helpers {

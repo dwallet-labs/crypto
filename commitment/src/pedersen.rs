@@ -114,7 +114,7 @@ pub type CommitmentSpacePublicParameters<GroupElement> =
     group::PublicParameters<CommitmentSpaceGroupElement<GroupElement>>;
 
 /// The Public Parameters of a Pedersen Commitment.
-/// 
+///
 /// This struct should be carefully instantiated,
 /// as wrong choice of generators can break the commitment's binding and/or hiding propert(ies).
 /// We offer a safe instantiation for prime-order groups with [`PublicParameters::derive`] using

@@ -1,15 +1,15 @@
 // Author: dWallet Labs, Ltd.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-use crate::language::WitnessSpaceValue;
-use crate::{language, Error, Result};
-use crypto_bigint::rand_core::CryptoRngCore;
-use crypto_bigint::Concat;
+use std::array;
+
+use crypto_bigint::{rand_core::CryptoRngCore, Concat};
 use group::{ComputationalSecuritySizedNumber, GroupElement};
 use merlin::Transcript;
 use proof::TranscriptProtocol;
 use serde::{Deserialize, Serialize};
-use std::array;
+
+use crate::{language, language::WitnessSpaceValue, Error, Result};
 
 /// A Universally Composable (UC) Maurer Zero-Knowledge Proof via Fischlin's transform.
 /// Implements [Chen and Lindell (2024)](https://eprint.iacr.org/2024/526.pdf).
@@ -36,8 +36,8 @@ impl<
         ProtocolContext: Clone + Serialize,
     > Proof<REPETITIONS, Language, ProtocolContext>
 {
-    /// Prove a Universally Composable (UC) Extractable zero-knowledge (ZK) Maurer statement via Fischlin's transform.
-    /// Implements [Chen and Lindell (2024)](https://eprint.iacr.org/2024/526.pdf), sections 2.2, 2.3.
+    /// Prove a Universally Composable (UC) Extractable zero-knowledge (ZK) Maurer statement via
+    /// Fischlin's transform. Implements [Chen and Lindell (2024)](https://eprint.iacr.org/2024/526.pdf), sections 2.2, 2.3.
     /// Returns the zero-knowledge proof.
     pub fn prove(
         protocol_context: &ProtocolContext,
@@ -79,13 +79,15 @@ impl<
                     break;
                 }
 
-                // Advance the challenge. Safe to wrap as it requires computational security work to overflow.
+                // Advance the challenge. Safe to wrap as it requires computational security work to
+                // overflow.
                 challenge = challenge.wrapping_add(&ComputationalSecuritySizedNumber::ONE);
 
                 // Advance the response. Due to the nature of the loop,
                 // every iteration increases the challenge by `1` and the response by `witness`.
-                // This ensures that the response equals the randomizer plus the witness times the challenge:
-                // $z_i = \sigma_i + e_i \cdot w$ without requiring $t$ multiplications (only additions, which is cheaper).
+                // This ensures that the response equals the randomizer plus the witness times the
+                // challenge: $z_i = \sigma_i + e_i \cdot w$ without requiring $t$
+                // multiplications (only additions, which is cheaper).
                 response += &witness;
             }
 
@@ -111,8 +113,8 @@ impl<
         Ok((uc_proof, statement))
     }
 
-    /// Verify a Universally Composable (UC) Extractable Maurer zero-knowledge claim via Fischlin's transform.
-    /// Implements [Chen and Lindell (2024)](https://eprint.iacr.org/2024/526.pdf), sections 2.2, 2.3.
+    /// Verify a Universally Composable (UC) Extractable Maurer zero-knowledge claim via Fischlin's
+    /// transform. Implements [Chen and Lindell (2024)](https://eprint.iacr.org/2024/526.pdf), sections 2.2, 2.3.
     pub fn verify(
         &self,
         protocol_context: &ProtocolContext,
@@ -172,8 +174,8 @@ impl<
         Ok(transcript.challenge(b"common hash"))
     }
 
-    /// Performs the Fischlin transformation check that $h_i = H(common-h, i, e_i, z_i)$ hits the target,
-    /// i.e. it starts with `target_bits` $b$ zeros.
+    /// Performs the Fischlin transformation check that $h_i = H(common-h, i, e_i, z_i)$ hits the
+    /// target, i.e. it starts with `target_bits` $b$ zeros.
     fn hash_hits_target(
         common_hash: <ComputationalSecuritySizedNumber as Concat>::Output,
         i: usize,
@@ -209,16 +211,18 @@ impl<
 
 // These tests helpers can be used for different `group` implementations,
 // therefore they need to be exported.
-// Since exporting rust `#[cfg(test)]` is impossible, they exist in a dedicated feature-gated module.
+// Since exporting rust `#[cfg(test)]` is impossible, they exist in a dedicated feature-gated
+// module.
 #[cfg(any(test, feature = "benchmarking"))]
 #[allow(unused_imports)]
 pub(crate) mod test_helpers {
-    use super::*;
-    use crate::test_helpers::{sample_witness, sample_witnesses};
+    use std::{marker::PhantomData, time::Duration};
+
     use criterion::measurement::{Measurement, WallTime};
     use rand_core::OsRng;
-    use std::marker::PhantomData;
-    use std::time::Duration;
+
+    use super::*;
+    use crate::test_helpers::{sample_witness, sample_witnesses};
 
     pub fn generate_valid_fischlin_proof<
         const REPETITIONS: usize,
@@ -289,7 +293,8 @@ pub(crate) mod test_helpers {
             challenges: challenges.clone().map(|v| v[0]),
         };
 
-        // A valid maurer proof shouldn't pass Fischlin verification, as the hash computation must fail.
+        // A valid maurer proof shouldn't pass Fischlin verification, as the hash computation must
+        // fail.
         assert!(
             fischlin_proof
                 .maurer_proof
