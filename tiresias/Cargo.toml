@@ -7,26 +7,26 @@ license = "BSD-3-Clause-Clear"
 [dependencies]
 group = { path = "../group" }
 homomorphic_encryption = { path = "../homomorphic-encryption" }
-crypto-bigint = { version = "0.5.5", features = ["rand_core", "serde", "alloc"], default-features = false }
-merlin = { version = "3.0.0", default-features = false }
-serde = { version = "1.0.163", features = ["derive"] }
-thiserror = "1.0.40"
-gcd = "2.3.0"
-subtle = { version = "2.5", features = ["const-generics"] }
-crypto-primes = { version = "0.5.0", default-features = false }
+crypto-bigint = { workspace = true, features = ["rand_core", "serde", "alloc"], default-features = false }
+merlin = { workspace = true, default-features = false }
+serde = { workspace = true, features = ["derive"] }
+thiserror = { workspace = true }
+gcd = { workspace = true }
+subtle = { workspace = true, features = ["const-generics"] }
+crypto-primes = { workspace = true, default-features = false }
 
-rayon = { version = "1.7.0", optional = true }
+rayon = { workspace = true, optional = true }
 
 # For benchmarking
-criterion = { version = "0.5", features = ["html_reports"], optional = true }
-rand_core = { version = "0.6.4", features = ["std"], optional = true }
-rand = { version = "0.8.5", optional = true }
-rstest = { version = "0.21.0", optional = true }
+criterion = { workspace = true, features = ["html_reports"], optional = true }
+rand_core = { workspace = true, features = ["std"], optional = true }
+rand = { workspace = true, optional = true }
+rstest = { workspace = true, optional = true }
 
 [dev-dependencies]
-rand_core = { version = "0.6.4", features = ["std"] }
-rstest = "0.21.0"
-rand = "0.8.5"
+rand_core = { workspace = true, features = ["std"] }
+rstest = { workspace = true }
+rand = { workspace = true }
 
 [features]
 parallel = ["dep:rayon"]

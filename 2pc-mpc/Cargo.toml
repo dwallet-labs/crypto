@@ -24,7 +24,7 @@ getrandom = { workspace = true, features = ["js"] }
 rand = { workspace = true, features = ["std"], optional = true }
 rand_core = { workspace = true, features = ["std"], optional = true }
 rstest = { workspace = true, optional = true }
-ecdsa = { version = "0.16.9", features = ["verifying"], optional = true }
+ecdsa = { workspace = true, features = ["verifying"], optional = true }
 k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
 
 [dev-dependencies]
@@ -34,7 +34,7 @@ rstest = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
 proof = { path = "../proof", features = ["test_helpers"] }
 maurer = { path = "../maurer", features = ["test_helpers"] }
-ecdsa = { version = "0.16.9", features = ["verifying"] }
+ecdsa = { workspace = true, features = ["verifying"] }
 k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false }
 
 [features]
