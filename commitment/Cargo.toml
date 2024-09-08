@@ -6,16 +6,16 @@ license = "BSD-3-Clause-Clear"
 
 [dependencies]
 group = { path = "../group" }
-crypto-bigint = { version = "0.5.5", features = ["rand_core", "serde"], default-features = false }
-serde = { version = "1.0", features = ["derive"] }
-merlin = { version = "3", default-features = false }
-thiserror = "1.0"
+crypto-bigint = { workspace = true }
+serde = { workspace = true }
+merlin = { workspace = true }
+thiserror = { workspace = true }
 
-rand_core = { version = "0.6", features = ["std"], optional = true }
+rand_core = { workspace = true, features = ["std"], optional = true }
 
 [dev-dependencies]
-rand_core = { version = "0.6.4", features = ["std"] }
-bulletproofs = "4.0.0"
+rand_core = { workspace = true, features = ["std"] }
+bulletproofs = { workspace = true }
 
 [features]
 test_helpers = ["dep:rand_core"]

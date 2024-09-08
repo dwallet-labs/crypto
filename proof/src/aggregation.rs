@@ -183,8 +183,8 @@ pub fn process_incoming_messages<T>(
     Ok(messages)
 }
 
-// Since exporting rust `#[cfg(test)]` is impossible, these test helpers exist in a dedicated feature-gated
-// module.
+// Since exporting rust `#[cfg(test)]` is impossible, these test helpers exist in a dedicated
+// feature-gated module.
 #[cfg(feature = "test_helpers")]
 pub mod test_helpers {
     use std::{collections::HashMap, time::Duration};

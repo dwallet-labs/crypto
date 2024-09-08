@@ -17,9 +17,10 @@ pub const ORDER: U256 = <Secp256k1 as Curve>::ORDER;
 pub const MODULUS: U256 =
     U256::from_be_hex("fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f");
 
-/// Any Weierstrass elliptic curve can be represented as an equation in the following template: $y^2
-/// = x^3 + ax^ + b mod(p)$. For secp256k1 specifically, $a = 0$ and $b = 7$, yielding the equation
-/// $y^2 = x^3 + 7 mod(p)$.
+// Any Weierstrass elliptic curve can be represented as an equation in the following template:
+// $y^2 = x^3 + ax^ + b mod(p)$.
+// For secp256k1 specifically, $a = 0$ and $b = 7$, yielding the equation
+// $y^2 = x^3 + 7 mod(p)$.
 pub const CURVE_EQUATION_A: U256 = U256::ZERO;
 pub const CURVE_EQUATION_B: U256 =
     U256::from_be_hex("0000000000000000000000000000000000000000000000000000000000000007");
