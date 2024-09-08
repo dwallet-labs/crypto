@@ -236,9 +236,8 @@ mod tests {
     use rand_core::OsRng;
     use rstest::rstest;
 
-    use crate::{language, test_helpers};
-
     use super::*;
+    use crate::{language, test_helpers};
 
     pub(crate) type Lang = Language<
         { secp256k1::SCALAR_LIMBS },
@@ -454,12 +453,11 @@ mod tests {
 pub mod benches {
     use criterion::Criterion;
 
+    use super::*;
     use crate::{
         committment_of_discrete_log::tests::{language_public_parameters, Lang},
         test_helpers,
     };
-
-    use super::*;
 
     pub(crate) fn benchmark(_c: &mut Criterion) {
         let language_public_parameters = language_public_parameters();

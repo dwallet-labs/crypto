@@ -9,6 +9,7 @@ use serde::{Deserialize, Serialize};
 use crate::{language::GroupsPublicParameters, Result, SOUND_PROOFS_REPETITIONS};
 
 /// Ratio Between Committed Values is the Discrete Log Maurer Language.
+///
 /// $$ (m,r_1,r_2) \mapsto Com_{G,H}(m; r_1), Com_{X,H}(m, r_2) $$
 /// Where $X=g^x$ is a public parameter, and we use Pedersen commitments where
 /// $Com_{X,H}(m,r_2) = Com_{G,H}(x*m, r_2)$.
@@ -216,9 +217,8 @@ mod tests {
     use rand_core::OsRng;
     use rstest::rstest;
 
-    use crate::{language, test_helpers};
-
     use super::*;
+    use crate::{language, test_helpers};
 
     pub(crate) type Lang =
         Language<{ secp256k1::SCALAR_LIMBS }, secp256k1::Scalar, secp256k1::GroupElement>;
@@ -438,12 +438,11 @@ mod tests {
 pub mod benches {
     use criterion::Criterion;
 
+    use super::*;
     use crate::{
         discrete_log_ratio_of_committed_values::tests::{language_public_parameters, Lang},
         test_helpers,
     };
-
-    use super::*;
 
     pub(crate) fn benchmark(_c: &mut Criterion) {
         let language_public_parameters = language_public_parameters();

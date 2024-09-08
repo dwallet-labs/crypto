@@ -1,10 +1,10 @@
 // Author: dWallet Labs, Ltd.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-use crate::{language, Proof};
-
 pub use decommitment_round::Decommitment;
 pub use proof_share_round::ProofShare;
+
+use crate::{language, Proof};
 
 pub mod commitment_round;
 pub mod decommitment_round;
@@ -19,18 +19,19 @@ pub type Output<const REPETITIONS: usize, Language, ProtocolContext> = (
 #[cfg(any(test, feature = "benchmarking"))]
 #[allow(unused_imports)]
 pub(super) mod test_helpers {
+    use std::{
+        collections::{HashMap, HashSet},
+        iter,
+        marker::PhantomData,
+        time::Duration,
+    };
+
     use criterion::measurement::{Measurement, WallTime};
     use group::PartyID;
     use rand_core::OsRng;
-    use std::collections::{HashMap, HashSet};
-    use std::iter;
-    use std::marker::PhantomData;
-    use std::time::Duration;
-
-    use crate::test_helpers::sample_witnesses;
-    use crate::Language;
 
     use super::*;
+    use crate::{test_helpers::sample_witnesses, Language};
 
     /// Sample witnesses for aggregation tests.
     pub fn sample_witnesses_for_aggregation<
@@ -116,7 +117,8 @@ pub(super) mod test_helpers {
         );
     }
 
-    /// Test that the Maurer aggregation protocol for `Lang` aborts identifiably in the presence of unresponsive parties.
+    /// Test that the Maurer aggregation protocol for `Lang` aborts identifiably in the presence of
+    /// unresponsive parties.
     pub fn unresponsive_parties_aborts_session_identifiably<
         const REPETITIONS: usize,
         Lang: Language<REPETITIONS>,
@@ -149,7 +151,8 @@ pub(super) mod test_helpers {
         );
     }
 
-    /// Test that the Maurer aggregation protocol for `Lang` aborts identifiably in the presence of malicious parties in proof share round.
+    /// Test that the Maurer aggregation protocol for `Lang` aborts identifiably in the presence of
+    /// malicious parties in proof share round.
     pub fn failed_proof_share_verification_aborts_session_identifiably<
         const REPETITIONS: usize,
         Lang: Language<REPETITIONS>,

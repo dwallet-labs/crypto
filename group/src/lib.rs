@@ -8,10 +8,9 @@ use core::{
 };
 
 use crypto_bigint::{rand_core::CryptoRngCore, Uint, U128, U64};
+pub use reduce::Reduce;
 use serde::{Deserialize, Serialize};
 use subtle::{Choice, ConditionallySelectable, ConstantTimeEq, CtOption};
-
-pub use reduce::Reduce;
 
 pub mod helpers;
 

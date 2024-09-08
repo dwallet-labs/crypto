@@ -16,10 +16,11 @@ mod proof;
 #[cfg(any(test, feature = "benchmarking"))]
 #[allow(unused_imports)]
 pub mod test_helpers {
-    pub use crate::aggregation::test_helpers::*;
-    pub use crate::language::test_helpers::*;
-    pub use crate::proof::fischlin::test_helpers::*;
-    pub use crate::proof::test_helpers::*;
+    pub use crate::{
+        aggregation::test_helpers::*,
+        language::test_helpers::*,
+        proof::{fischlin::test_helpers::*, test_helpers::*},
+    };
 }
 
 /// Maurer error.

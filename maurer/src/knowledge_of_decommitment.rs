@@ -6,8 +6,7 @@ use commitment::{GroupsPublicParametersAccessors, HomomorphicCommitmentScheme};
 use group::{direct_product, Samplable};
 use serde::{Deserialize, Serialize};
 
-use crate::language::GroupsPublicParameters;
-use crate::Result;
+use crate::{language::GroupsPublicParameters, Result};
 
 /// Knowledge of Decommitment Maurer Language.
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug, Eq)]
@@ -205,17 +204,15 @@ impl<
 #[cfg(any(test, feature = "benchmarking"))]
 #[allow(unused_imports)]
 mod tests {
-    use commitment::pedersen;
-    use commitment::pedersen::Pedersen;
+    use commitment::{pedersen, pedersen::Pedersen};
     use group::secp256k1;
     use rand_core::OsRng;
     use rstest::rstest;
 
+    use super::*;
     use crate::{
         language, test_helpers, BIT_SOUNDNESS_PROOFS_REPETITIONS, SOUND_PROOFS_REPETITIONS,
     };
-
-    use super::*;
 
     pub(crate) type Lang<const REPETITIONS: usize, const BATCH_SIZE: usize> = Language<
         REPETITIONS,
@@ -431,10 +428,12 @@ mod tests {
 
 #[cfg(feature = "benchmarking")]
 pub(crate) mod benches {
-    use crate::knowledge_of_decommitment::tests::{language_public_parameters, Lang};
-    use crate::test_helpers;
-    use crate::{BIT_SOUNDNESS_PROOFS_REPETITIONS, SOUND_PROOFS_REPETITIONS};
     use criterion::Criterion;
+
+    use crate::{
+        knowledge_of_decommitment::tests::{language_public_parameters, Lang},
+        test_helpers, BIT_SOUNDNESS_PROOFS_REPETITIONS, SOUND_PROOFS_REPETITIONS,
+    };
 
     pub(crate) fn benchmark(_c: &mut Criterion) {
         let sound_language_public_parameters =

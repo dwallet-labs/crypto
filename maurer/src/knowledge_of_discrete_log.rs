@@ -111,8 +111,9 @@ pub type Proof<Scalar, GroupElement, ProtocolContext> =
     crate::Proof<SOUND_PROOFS_REPETITIONS, Language<Scalar, GroupElement>, ProtocolContext>;
 
 pub(super) mod private {
-    use serde::{Deserialize, Serialize};
     use std::marker::PhantomData;
+
+    use serde::{Deserialize, Serialize};
 
     #[derive(Clone, Serialize, Deserialize, PartialEq, Debug, Eq)]
     pub struct Language<const REPETITIONS: usize, Scalar, GroupElement> {
@@ -129,9 +130,8 @@ mod tests {
     use rand_core::OsRng;
     use rstest::rstest;
 
-    use crate::{language, test_helpers};
-
     use super::*;
+    use crate::{language, test_helpers};
 
     pub(crate) type Lang = Language<secp256k1::Scalar, secp256k1::GroupElement>;
     pub(crate) type FischlinLang<const REPETITIONS: usize> =
@@ -345,9 +345,8 @@ mod tests {
 pub(crate) mod benches {
     use criterion::Criterion;
 
-    use crate::knowledge_of_discrete_log::tests::FischlinLang;
     use crate::{
-        knowledge_of_discrete_log::tests::{language_public_parameters, Lang},
+        knowledge_of_discrete_log::tests::{language_public_parameters, FischlinLang, Lang},
         test_helpers, SOUND_PROOFS_REPETITIONS,
     };
 

@@ -16,6 +16,7 @@ use crate::{
 };
 
 /// The Public Parameters used for Threshold Decryption in Tiresias.
+///
 /// This struct holds precomputed values that are computationally expensive to compute, but do not
 /// change with the decrypter set (unlike the adjusted lagrange coefficients), besides public
 /// outputs from the DKG process (e.g., `base` and `public_verification_key`).

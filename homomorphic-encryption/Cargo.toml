@@ -5,13 +5,14 @@ edition = "2021"
 license = "BSD-3-Clause-Clear"
 
 [dependencies]
-crypto-bigint = { version = "0.5", features = ["rand_core", "serde"], default-features = false }
-serde = { version = "1.0", features = ["derive"] }
+crypto-bigint = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
 group = { path = "../group" }
-thiserror = "1.0"
+thiserror = { workspace = true }
 
 [dev-dependencies]
-rstest = "0.18"
-rand_core = { version = "0.6", features = ["std"] }
+rstest = { workspace = true }
+rand_core = { workspace = true, features = ["std"] }
 
 [features]
+

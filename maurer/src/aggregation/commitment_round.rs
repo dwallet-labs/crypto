@@ -1,18 +1,18 @@
 // Author: dWallet Labs, Ltd.
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 
-use crate::aggregation::decommitment_round;
-use crate::aggregation::decommitment_round::Decommitment;
-use crate::{language, Proof};
-use crate::{Error, Result};
-use commitment::Commitment;
-use crypto_bigint::rand_core::CryptoRngCore;
-use crypto_bigint::Random;
-use group::{ComputationalSecuritySizedNumber, GroupElement, PartyID};
-use proof::aggregation;
-use proof::aggregation::CommitmentRoundParty;
-use serde::Serialize;
 use std::collections::HashSet;
+
+use commitment::Commitment;
+use crypto_bigint::{rand_core::CryptoRngCore, Random};
+use group::{ComputationalSecuritySizedNumber, GroupElement, PartyID};
+use proof::{aggregation, aggregation::CommitmentRoundParty};
+use serde::Serialize;
+
+use crate::{
+    aggregation::{decommitment_round, decommitment_round::Decommitment},
+    language, Error, Proof, Result,
+};
 
 #[cfg_attr(any(test, feature = "test_helpers"), derive(Clone))]
 pub struct Party<

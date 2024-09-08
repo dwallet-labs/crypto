@@ -4,25 +4,32 @@ setup:
 	cargo install cargo-audit
 
 build:
-	cargo build --release
+	cargo build
 
 build-wasm:
-	cargo build --target wasm32-unknown-unknown --release
+	rustup target add wasm32-unknown-unknown
+	cargo build --target wasm32-unknown-unknown
 
 fmt:
 	cargo fmt --all
 
 test:
-	cargo test --all-features --release
+	cargo test --all-features --workspace
 
 lint:
 	cargo clippy --all-targets --all-features -- -D warnings
 
 doc:
-	cargo doc --no-deps --document-private-items --all-features --examples
+	cargo doc --workspace --no-deps --all-features --document-private-items --examples
 
-bench:
-	cargo bench --features benchmarking
+bench-all:
+	cargo bench --features benchmarking --workspace
+bench-maurer:
+	cargo bench --features benchmarking --package maurer
+bench-2pc:
+	cargo bench --features benchmarking --package 2pc-mpc
+bench-tiresias:
+	cargo bench --features benchmarking --package tiresias
 
 audit:
 	cargo audit

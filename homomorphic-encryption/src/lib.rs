@@ -152,18 +152,16 @@ pub trait AdditivelyHomomorphicEncryptionKey<const PLAINTEXT_SPACE_SCALAR_LIMBS:
     /// Correctness is assured as long as $\PT_{\sf eval}<N$.
     ///
     /// In more detail, these steps are taken to generically assure circuit privacy:
-    /// 1. Re-randomization.
-    /// This should be done by adding an encryption of zero with fresh
-    ///    (uniformly sampled) randomness to the outputted ciphertext.
+    /// 1. Re-randomization. This should be done by adding encryption of zero with fresh (uniformly
+    ///    sampled) randomness to the outputted ciphertext.
     ///
-    /// 2. Masking.
-    /// Our evaluation should be masked by a random multiplication of the homomorphic
+    /// 2. Masking. Our evaluation should be masked by a random multiplication of the homomorphic
     ///    evaluation group order $q$.
     ///
     ///    While the decryption modulo $q$ will remain correct,
     ///    assuming that the mask was "big enough", i.e., $\omega$ is uniformly chosen from
-    /// $[0,2^s\PTsum)$, The decryption will also be statistically indistinguishable from
-    /// random.
+    ///    $[0,2^s\PTsum)$, The decryption will also be statistically indistinguishable from
+    ///    random.
     ///
     ///    *NOTE*: this function cannot (and in fact, does not) guarantee that
     ///    each of the given ciphertexts $\ct_i$ is in fact bounded by its corresponding
@@ -173,8 +171,7 @@ pub trait AdditivelyHomomorphicEncryptionKey<const PLAINTEXT_SPACE_SCALAR_LIMBS:
     ///    An exception to the above is when the ciphertext was encrypted by the caller,
     ///    in which case the caller knows the corresponding plaintext.
     ///
-    /// 3. No modulations.
-    /// The size of our evaluation $\PT_{\sf eval}$ should be smaller than the
+    /// 3. No modulations. The size of our evaluation $\PT_{\sf eval}$ should be smaller than the
     ///    order of the encryption plaintext group $N$ to ensure it does not go through modulation
     ///    in the plaintext space.
     ///

@@ -5,10 +5,10 @@ edition = "2021"
 license = "BSD-3-Clause-Clear"
 
 [dependencies]
-crypto-bigint = { version = "0.5", features = ["rand_core", "serde"], default-features = false }
-merlin = { version = "3", default-features = false }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+crypto-bigint = { workspace = true, features = ["rand_core", "serde"], default-features = false }
+merlin = { workspace = true, default-features = false }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, default-features = false, features = ["alloc"] }
 group = { path = "../group" }
 proof = { path = "../proof" }
 homomorphic_encryption = { path = "../homomorphic-encryption" }
@@ -16,31 +16,32 @@ commitment = { path = "../commitment" }
 maurer = { path = "../maurer" }
 enhanced_maurer = { path = "../enhanced-maurer" }
 tiresias = { path = "../tiresias", features = ["test_exports"] }
-thiserror = "1.0"
+thiserror = { workspace = true }
 
-criterion = { version = "0.5", features = ["html_reports"], optional = true }
-getrandom = { version = "0.2", features = ["js"] }
-rand = { version = "0.8", features = ["std"], optional = true }
-rand_core = { version = "0.6", features = ["std"], optional = true }
-rstest = { version = "0.18", optional = true }
-ecdsa = { version = "0.16.9", features = ["verifying"], optional = true }
-k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
+# For Benchmarks.
+criterion = { workspace = true, features = ["html_reports"], optional = true }
+getrandom = { workspace = true, features = ["js"] }
+rand = { workspace = true, features = ["std"], optional = true }
+rand_core = { workspace = true, features = ["std"], optional = true }
+rstest = { workspace = true, optional = true }
+ecdsa = { workspace = true, features = ["verifying"], optional = true }
+k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
 
 [dev-dependencies]
-rand = { version = "0.8", features = ["std"] }
-rand_core = { version = "0.6", features = ["std"] }
-rstest = { version = "0.18" }
-criterion = { version = "0.5", features = ["html_reports"] }
+rand = { workspace = true, features = ["std"] }
+rand_core = { workspace = true, features = ["std"] }
+rstest = { workspace = true }
+criterion = { workspace = true, features = ["html_reports"] }
 proof = { path = "../proof", features = ["test_helpers"] }
 maurer = { path = "../maurer", features = ["test_helpers"] }
-ecdsa = { version = "0.16.9", features = ["verifying"] }
-k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false }
+ecdsa = { workspace = true, features = ["verifying"] }
+k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false }
 
 [features]
 secp256k1 = []
 paillier = []
 bulletproofs = []
-benchmarking = ["dep:criterion", "dep:rand_core", "dep:rstest", "dep:ecdsa", "dep:k256", "secp256k1", "paillier", "bulletproofs", "proof/test_helpers"]
+benchmarking = ["dep:criterion", "dep:rand", "dep:rand_core", "dep:rstest", "dep:ecdsa", "dep:k256", "secp256k1", "paillier", "bulletproofs", "proof/test_helpers"]
 
 [[bench]]
 name = "benches"
