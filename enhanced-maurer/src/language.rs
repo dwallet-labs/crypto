@@ -23,6 +23,7 @@ use tiresias::secret_sharing::shamir::Polynomial;
 use crate::{Error, Result};
 
 /// An Enhanced Maurer Zero-Knowledge Proof Language.
+///
 /// Can be generically used to generate a batched Maurer zero-knowledge `Proof` with range claims.
 /// As defined in Section 4. Enhanced Batch Schnorr Protocols in the paper "2PC-MPC: Threshold ECDSA
 /// with Thousands of Parties".
@@ -41,12 +42,13 @@ pub struct EnhancedLanguage<
 }
 
 /// An Enhanceable Maurer Language.
+///
 /// By itself implements the `maurer::Language` trait, although it might not be a valid
 /// language with no range claims. Defines transition methods to compose and decompose its witness
 /// from and to what we call a _decomposed witness_, which is a list of range claims over the range
 /// proof's commitment scheme message space.
 ///
-/// Essentially, in case a witness is bigger than the size of the range-proof commitment scheme
+/// Essentially, if a witness is bigger than the size of the range-proof commitment scheme
 /// message space; it is broken-down (decomposed) into multiple smaller range claims that do fit in
 /// the commitment. This is done by viewing the witness w in base \Delta such that
 /// w=\sum_{i}{w_i}\Delta^i, with /// \Delta \ll \abs{\calM_\pp}.

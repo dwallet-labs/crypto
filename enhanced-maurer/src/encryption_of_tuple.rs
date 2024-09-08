@@ -77,6 +77,7 @@ pub type StatementSpaceGroupElement<
 >;
 
 /// The Public Parameters of the Encryption of a Tuple Maurer Language.
+///
 /// The `lower_bound` of `ciphertext` should be verified independently,
 /// e.g. by verifying (and following) a sequence of enhanced proofs over the homomorphic
 /// computations that yields it.

@@ -9,6 +9,7 @@ use serde::{Deserialize, Serialize};
 use crate::{language::GroupsPublicParameters, Result, SOUND_PROOFS_REPETITIONS};
 
 /// Ratio Between Committed Values is the Discrete Log Maurer Language.
+///
 /// $$ (m,r_1,r_2) \mapsto Com_{G,H}(m; r_1), Com_{X,H}(m, r_2) $$
 /// Where $X=g^x$ is a public parameter, and we use Pedersen commitments where
 /// $Com_{X,H}(m,r_2) = Com_{G,H}(x*m, r_2)$.
