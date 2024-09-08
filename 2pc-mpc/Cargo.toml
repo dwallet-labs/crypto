@@ -25,7 +25,7 @@ rand = { workspace = true, features = ["std"], optional = true }
 rand_core = { workspace = true, features = ["std"], optional = true }
 rstest = { workspace = true, optional = true }
 ecdsa = { version = "0.16.9", features = ["verifying"], optional = true }
-k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
+k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false, optional = true }
 
 [dev-dependencies]
 rand = { workspace = true, features = ["std"] }
@@ -35,7 +35,7 @@ criterion = { workspace = true, features = ["html_reports"] }
 proof = { path = "../proof", features = ["test_helpers"] }
 maurer = { path = "../maurer", features = ["test_helpers"] }
 ecdsa = { version = "0.16.9", features = ["verifying"] }
-k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false }
+k256 = { workspace = true, features = ["arithmetic", "critical-section", "precomputed-tables", "serde", "ecdsa", "hash2curve", "alloc"], default-features = false }
 
 [features]
 secp256k1 = []

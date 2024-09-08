@@ -39,3 +39,4 @@ rand = "0.8.5"
 curve25519-dalek = { package = "curve25519-dalek-ng", version = "4", default-features = false }
 criterion = { version = "0.5" }
 getrandom = { version = "0.2" }
+k256 = { git = 'https://github.com/ycscaly/elliptic-curves.git', branch = "13.3-fixed", default-features = false }
