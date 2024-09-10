@@ -48,7 +48,7 @@ The _MPC_ protocol, where the decentralized party emulates the second party in t
 Note: this protocol can easily be used as a traditional Threshold ECDSA protocol by emulating a centralized party
 with `0` secrets.
 
-# Tiresias: Scalable, Maliciously Secure Threshold Paillier
+## Tiresias: Scalable, Maliciously Secure Threshold Paillier
 
 A pure-Rust implementation of the
 UC-secure ["Tiresias: Large Scale, Maliciously Secure Threshold Paillier"](https://eprint.iacr.org/2023/998) paper by:
