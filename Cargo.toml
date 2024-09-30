@@ -34,7 +34,7 @@ gcd = { version = "2.3.0" }
 crypto-primes = { version = "0.5.0", default-features = false }
 rayon = { version = "1.10.0" }
 rand_core = { version = "0.6.4", default-features = false }
-rstest = "0.22.0"
+rstest = "0.23.0"
 rand = "0.8.5"
 curve25519-dalek = { package = "curve25519-dalek-ng", version = "4", default-features = false }
 # curve25519 uses an old version, so must we.
